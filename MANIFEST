@@ -6,3 +6,6 @@ lib/File/PM2File.pm
 t/File/PM2File.d
 t/File/PM2File.pm
 t/File/PM2File.t
+tlib/File/SubPM.pm
+tlib/File/Package.pm
+tlib/Test/Tech.pm

@@ -23,15 +23,11 @@ my $tests = join ' ',unix2os('t/File/PM2File.t');
 WriteMakefile(
     NAME => 'File::PM2File',
     DISTNAME => 'File-PM2File',
-    VERSION  => '0.03',
+    VERSION  => '0.04',
     dist     => {COMPRESS => 'gzip',
                 'gz' => 'gz'},
     test     => {TESTS => $tests},
-    PREREQ_PM => {'File::SmartNL' => '0',
-                  'File::Package' => '0',
-                  'File::TestPath' => '0',
-                  'Text::Scrub' => '0',
-                  'Test::Tech' => '1.08',},
+    
     
 
     ($] >= 5.005 ?     

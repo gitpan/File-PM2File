@@ -13,10 +13,16 @@ use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
 $VERSION = '1.1';
-$DATE = '2003/07/11';
+$DATE = '2003/07/26';
 $FILE = __FILE__;
 
 use File::Spec;
+use SelfLoader;
+
+1
+
+__DATA__
+
 
 ######
 #
@@ -26,7 +32,7 @@ sub pm2file
    my (undef, $pm) = @_;
    my $require = File::PM2File->pm2require( $pm );
    my ($abs_file,$inc_path) = File::PM2File->find_in_include($require);
-   ($abs_file,$inc_path, $require)
+   ($abs_file,  $inc_path, $require)
 }
 
 
@@ -73,29 +79,30 @@ __END__
 
 =head1 NAME
 
-File::PM2File - find the absolute file for an unloaded program module
+File::PM2File - find the absolute file for a program module, loaded or unloaded
 
 =head1 SYNOPSIS
 
   use File::PM2File
 
   ($abs_file, $inc_path, $require) = File::PM2File->pm2file($pm)
-  ($abs_file, $inc_path)           = File::PM2File->find_in_include($file, [\@path])
+  ($abs_file, $inc_path)           = File::PM2File->find_in_include($file_relative, [\@path])
   $file                            = File::PM2File->pm2require($pm)
 
 =head DESCRIPTION
 
 From time to time, an program needs to know the abolute file for a program
 module that has not been loaded. The File::PM2File module provides methods
-to find this information.
+to find this information. For loaded files, using the hash %INC may
+perform better than using the methods in this module.
 
 =head1 METHODS
 
 =head2 find_in_include method
 
- ($abs_file, $inc_path) = File::PM2File->find_in_path($fspec, $file_relative, [\@path])
+ ($abs_file, $inc_path) = File::PM2File->find_in_include($file_relative, [\@path])
 
-The I<find_in_path> method looks for the I<$file_relative> in one of the directories in
+The I<find_in_include> method looks for the I<$file_relative> in one of the directories in
 the the I<@path> (I<@INC> path if I<@path> not supplied) in the order listed.
 The file I<$file_relative> may include relative directories.
 When I<find_in_include> finds the file, it returns the absolute file I<$file_absolute> and
@@ -103,18 +110,18 @@ the directory I<$path> where it found I<$file_relative>.
 
 =head2 pm2file method
 
-  ($abs_file, $inc_path) = File::PM2File->pm2file($pm_file)
+  ($abs_file, $inc_path, $require_file) = File::PM2File->pm2file($pm)
 
-The I<pm2file> method returns the absolute file and
-the directory in I<@INC> for a the program module
-I<$pm_file>.
+The I<pm2file> method returns the absolute file, 
+the directory in I<@INC>, and the relative I<$require_file>
+for a the program module I<$pm_file>.
 
 =head2 pm2require
 
  $file = File::PM2File->pm2require($pm_file)
 
 The I<pm2require> method returns the file suitable
-for use in a Perl I<require> given the I<$pm_file>
+for use in a Perl I<require> given the I<$pm>
 file.
 
 =head1 REQUIREMENTS
@@ -163,7 +170,9 @@ follow on the next lines. For example,
  =>     chdir File::Spec->updir();
  =>     my $include_dir = cwd();
  =>     chdir $restore_dir;
- =>     $include_dir =~ s=/=\\=g;
+ =>     if( $^O eq 'MSWin32') {
+ =>         $include_dir =~ s=/=\\=g;
+ =>     }
 
  =>     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
  =>     $absolute_file =~ s=.t$=.pm=;
