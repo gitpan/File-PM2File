@@ -10,23 +10,23 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.04';
-$DATE = '2003/07/26';
+$VERSION = '0.05';
+$DATE = '2003/09/13';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/File_PM2File.pm' => [qw(0.04 2003/07/26), 'revised 0.03'],
-    'MANIFEST' => [qw(0.04 2003/07/26), 'generated, replaces 0.03'],
-    'Makefile.PL' => [qw(0.04 2003/07/26), 'generated, replaces 0.03'],
-    'README' => [qw(0.04 2003/07/26), 'generated, replaces 0.03'],
-    'lib/File/PM2File.pm' => [qw(1.11 2003/07/26), 'revised 1.1'],
-    't/File/PM2File.d' => [qw(0.03 2003/07/26), 'revised 0.02'],
+    'lib/Docs/Site_SVD/File_PM2File.pm' => [qw(0.05 2003/09/13), 'revised 0.04'],
+    'MANIFEST' => [qw(0.05 2003/09/13), 'generated, replaces 0.04'],
+    'Makefile.PL' => [qw(0.05 2003/09/13), 'generated, replaces 0.04'],
+    'README' => [qw(0.05 2003/09/13), 'generated, replaces 0.04'],
+    'lib/File/PM2File.pm' => [qw(1.11 2003/09/13), 'revised 1.1'],
+    't/File/PM2File.d' => [qw(0.03 2003/07/26), 'unchanged'],
     't/File/PM2File.pm' => [qw(0.01 2003/07/11), 'unchanged'],
-    't/File/PM2File.t' => [qw(0.09 2003/07/26), 'revised 0.08'],
-    'tlib/File/SubPM.pm' => [qw(1.1 2003/07/26), 'new'],
-    'tlib/File/Package.pm' => [qw(1.1 2003/07/26), 'new'],
-    'tlib/Test/Tech.pm' => [qw(1.1 2003/07/26), 'new'],
+    't/File/PM2File.t' => [qw(0.1 2003/09/13), 'revised 0.09'],
+    'tlib/File/SubPM.pm' => [qw(1.11 2003/09/13), 'unchanged'],
+    'tlib/File/Package.pm' => [qw(1.12 2003/09/13), 'unchanged'],
+    'tlib/Test/Tech.pm' => [qw(1.13 2003/09/13), 'revised 1.1'],
 
 );
 
@@ -53,11 +53,11 @@ use vars qw(%INVENTORY);
 
   File::PM2File - Convert PM specifications to file specifications
 
- Revision: C
+ Revision: D
 
- Version: 0.04
+ Version: 0.05
 
- Date: 2003/07/26
+ Date: 2003/09/13
 
  Prepared for: General Public 
 
@@ -91,7 +91,7 @@ to the file specification for the current site operating system.
 
 =head2 1.3 Document overview.
 
-This document releases File::PM2File version 0.04
+This document releases File::PM2File version 0.05
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -107,8 +107,8 @@ system file specification.
 This document releases the file found
 at the following repository(s):
 
-   http://www.softwarediamonds/packages/File-PM2File-0.04
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.04
+   http://www.softwarediamonds/packages/File-PM2File-0.05
+   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.05
 
 
 Restrictions regarding duplication and license provisions
@@ -176,17 +176,17 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/File_PM2File.pm                            0.04    2003/07/26 revised 0.03
- MANIFEST                                                     0.04    2003/07/26 generated, replaces 0.03
- Makefile.PL                                                  0.04    2003/07/26 generated, replaces 0.03
- README                                                       0.04    2003/07/26 generated, replaces 0.03
- lib/File/PM2File.pm                                          1.11    2003/07/26 revised 1.1
- t/File/PM2File.d                                             0.03    2003/07/26 revised 0.02
+ lib/Docs/Site_SVD/File_PM2File.pm                            0.05    2003/09/13 revised 0.04
+ MANIFEST                                                     0.05    2003/09/13 generated, replaces 0.04
+ Makefile.PL                                                  0.05    2003/09/13 generated, replaces 0.04
+ README                                                       0.05    2003/09/13 generated, replaces 0.04
+ lib/File/PM2File.pm                                          1.11    2003/09/13 revised 1.1
+ t/File/PM2File.d                                             0.03    2003/07/26 unchanged
  t/File/PM2File.pm                                            0.01    2003/07/11 unchanged
- t/File/PM2File.t                                             0.09    2003/07/26 revised 0.08
- tlib/File/SubPM.pm                                           1.1     2003/07/26 new
- tlib/File/Package.pm                                         1.1     2003/07/26 new
- tlib/Test/Tech.pm                                            1.1     2003/07/26 new
+ t/File/PM2File.t                                             0.1     2003/09/13 revised 0.09
+ tlib/File/SubPM.pm                                           1.11    2003/09/13 unchanged
+ tlib/File/Package.pm                                         1.12    2003/09/13 unchanged
+ tlib/Test/Tech.pm                                            1.13    2003/09/13 revised 1.1
 
 
 =head2 3.3 Changes
@@ -284,7 +284,7 @@ t/Test/TestUtil/TestUtil....NOK 18# Test 18 got: '$VAR1 = '\\=head1 Title Page
   File::PM2File - Convert PM specifications to file specifications
 
 
- Revision: C
+ Revision: D
 
 [snip]
 
@@ -426,6 +426,14 @@ directory tlib. Test support files not longer need be in the
 lib directory. The test support files in tlib will vanish after
 the installtion.
 
+=item File-PM2File-0.05
+
+Added subroutine interfaces.
+
+Use Archive::TarGzip that uses modd 777 for directories instead of 666. Started to get
+emails from Unix about untar not being able to change to
+a directory with mod of 666.
+
 =back
 
 =head2 3.4 Adaptation data.
@@ -459,8 +467,8 @@ Follow the instructions for the the chosen installation software.
 
 The distribution file is at the following respositories:
 
-   http://www.softwarediamonds/packages/File-PM2File-0.04
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.04
+   http://www.softwarediamonds/packages/File-PM2File-0.05
+   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.05
 
 
 =item Prerequistes.
@@ -547,7 +555,13 @@ Plain Old Documentation
 
 =head1 2.0 SEE ALSO
 
-L<File::File2PM|File::File2PM>
+=over 4
+
+=item L<File::File2PM|File::File2PM> 
+
+=item L<Docs::US_DOD::SVD|Docs::US_DOD::SVD> 
+
+=back
 
 =for html
 <hr>
@@ -574,11 +588,11 @@ __DATA__
 DISTNAME: File-PM2File^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.04^
-FREEZE: 1^
+VERSION : 0.05^
+FREEZE: 0^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.03^
-REVISION: C^
+PREVIOUS_RELEASE: 0.04^
+REVISION: D^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 
@@ -854,6 +868,14 @@ directory tlib. Test support files not longer need be in the
 lib directory. The test support files in tlib will vanish after
 the installtion.
 
+\=item File-PM2File-0.05
+
+Added subroutine interfaces.
+
+Use Archive::TarGzip that uses modd 777 for directories instead of 666. Started to get
+emails from Unix about untar not being able to change to
+a directory with mod of 666.
+
 \=back
 
 ^
@@ -993,7 +1015,17 @@ Plain Old Documentation
 \=back
 ^
 
-SEE_ALSO: L<File::File2PM|File::File2PM>^
+SEE_ALSO: 
+\=over 4
+
+\=item L<File::File2PM|File::File2PM> 
+
+\=item L<Docs::US_DOD::SVD|Docs::US_DOD::SVD> 
+
+\=back
+^
+
+
 
 HTML:
 <hr>

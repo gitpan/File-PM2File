@@ -5,11 +5,11 @@ Title Page
 
       File::PM2File - Convert PM specifications to file specifications
 
-     Revision: C
+     Revision: D
 
-     Version: 0.04
+     Version: 0.05
 
-     Date: 2003/07/26
+     Date: 2003/09/13
 
      Prepared for: General Public 
 
@@ -36,7 +36,7 @@ Title Page
     to the file specification for the current site operating system.
 
   1.3 Document overview.
-    This document releases File::PM2File version 0.04 providing a
+    This document releases File::PM2File version 0.05 providing a
     description of the inventory, installation instructions and other
     information necessary to utilize and track this release.
 
@@ -47,8 +47,8 @@ Title Page
   3.1 Inventory of materials released.
     This document releases the file found at the following repository(s):
 
-       http://www.softwarediamonds/packages/File-PM2File-0.04
-       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.04
+       http://www.softwarediamonds/packages/File-PM2File-0.05
+       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.05
 
     Restrictions regarding duplication and license provisions are as
     follows:
@@ -92,17 +92,17 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/File_PM2File.pm                            0.04    2003/07/26 revised 0.03
-     MANIFEST                                                     0.04    2003/07/26 generated, replaces 0.03
-     Makefile.PL                                                  0.04    2003/07/26 generated, replaces 0.03
-     README                                                       0.04    2003/07/26 generated, replaces 0.03
-     lib/File/PM2File.pm                                          1.11    2003/07/26 revised 1.1
-     t/File/PM2File.d                                             0.03    2003/07/26 revised 0.02
+     lib/Docs/Site_SVD/File_PM2File.pm                            0.05    2003/09/13 revised 0.04
+     MANIFEST                                                     0.05    2003/09/13 generated, replaces 0.04
+     Makefile.PL                                                  0.05    2003/09/13 generated, replaces 0.04
+     README                                                       0.05    2003/09/13 generated, replaces 0.04
+     lib/File/PM2File.pm                                          1.11    2003/09/13 revised 1.1
+     t/File/PM2File.d                                             0.03    2003/07/26 unchanged
      t/File/PM2File.pm                                            0.01    2003/07/11 unchanged
-     t/File/PM2File.t                                             0.09    2003/07/26 revised 0.08
-     tlib/File/SubPM.pm                                           1.1     2003/07/26 new
-     tlib/File/Package.pm                                         1.1     2003/07/26 new
-     tlib/Test/Tech.pm                                            1.1     2003/07/26 new
+     t/File/PM2File.t                                             0.1     2003/09/13 revised 0.09
+     tlib/File/SubPM.pm                                           1.11    2003/09/13 unchanged
+     tlib/File/Package.pm                                         1.12    2003/09/13 unchanged
+     tlib/Test/Tech.pm                                            1.13    2003/09/13 revised 1.1
 
   3.3 Changes
     Changes are as follows:
@@ -191,7 +191,7 @@ Title Page
 
           File::PM2File - Convert PM specifications to file specifications
 
-         Revision: C
+         Revision: D
 
         [snip]
 
@@ -304,6 +304,13 @@ Title Page
         directory. The test support files in tlib will vanish after the
         installtion.
 
+    File-PM2File-0.05
+        Added subroutine interfaces.
+
+        Use Archive::TarGzip that uses modd 777 for directories instead of
+        666. Started to get emails from Unix about untar not being able to
+        change to a directory with mod of 666.
+
   3.4 Adaptation data.
     This installation requires that the installation site has the Perl
     programming language installed. There are no other additional
@@ -329,8 +336,8 @@ Title Page
 
         The distribution file is at the following respositories:
 
-           http://www.softwarediamonds/packages/File-PM2File-0.04
-           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.04
+           http://www.softwarediamonds/packages/File-PM2File-0.05
+           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.05
 
     Prerequistes.
          None.
@@ -378,4 +385,5 @@ Title Page
 
 2.0 SEE ALSO
     File::File2PM
+    Docs::US_DOD::SVD
 
