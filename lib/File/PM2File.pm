@@ -13,7 +13,7 @@ use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
 $VERSION = '1.1';
-$DATE = '2003/07/04';
+$DATE = '2003/07/11';
 $FILE = __FILE__;
 
 use File::Spec;
@@ -157,8 +157,6 @@ follow on the next lines. For example,
  =>     # Calculate the absolute file, relative file, and include directory
  =>     #    
  =>     my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
- =>     my $absolute_file = File::Spec->rel2abs(__FILE__);
- =>     $absolute_file =~ s=.t$=.pm=;
 
  =>     my $restore_dir = cwd();
  =>     chdir File::Spec->updir();
@@ -166,6 +164,9 @@ follow on the next lines. For example,
  =>     my $include_dir = cwd();
  =>     chdir $restore_dir;
  =>     $include_dir =~ s=/=\\=g;
+
+ =>     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
+ =>     $absolute_file =~ s=.t$=.pm=;
 
  =>     ######
  =>     # Put base directory as the first in the @INC path
