@@ -9,3 +9,4 @@ t/File/PM2File.t
 tlib/File/SubPM.pm
 tlib/File/Package.pm
 tlib/Test/Tech.pm
+tlib/Data/Secs2.pm

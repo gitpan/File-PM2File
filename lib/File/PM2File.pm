@@ -12,8 +12,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '1.11';
-$DATE = '2003/09/13';
+$VERSION = '1.12';
+$DATE = '2003/09/20';
 $FILE = __FILE__;
 
 use vars qw(@ISA @EXPORT_OK);
@@ -28,16 +28,16 @@ use SelfLoader;
 
 __DATA__
 
-
 ######
 #
 #
 sub pm2file
 {
-   my $require = pm2require( $_[-1] );
-   my ($abs_file,$inc_path) = find_in_include($require);
-   return ($abs_file,  $inc_path, $require) if wantarray;
-   $abs_file;
+     shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+     my $require = pm2require( $_[0] );
+     my ($abs_file,$inc_path) = find_in_include($require);
+     return ($abs_file,  $inc_path, $require) if wantarray;
+     $abs_file;
 }
 
 
@@ -47,25 +47,25 @@ sub pm2file
 sub find_in_include
 {
 
-   my $path = pop @_ if( ref($_[-1]) eq 'ARRAY');
-   my $file = $_[-1];
+     shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+     my ($file, $path) = @_;
 
-   $path = \@INC unless( $path );
+     $path = \@INC unless( $path );
 
-   ######
-   # Find the file in the search path
-   #
-   (undef, my $dirs, $file) = File::Spec->splitpath( $file ); 
-   my (@dirs) = File::Spec->splitdir( $dirs );
-   foreach my $path_dir (@$path) {
-       my $abs_file = File::Spec->catfile( $path_dir, @dirs, $file );  
-       if(-f $abs_file) {
-          $path_dir =~ s|/|\\|g if $^O eq 'MSWin32'; # MicroSoft thing
-          return ($abs_file, $path_dir) if wantarray;
-          return $abs_file;
-       }
-   }
-   undef;
+     ######
+     # Find the file in the search path
+     #
+     (undef, my $dirs, $file) = File::Spec->splitpath( $file ); 
+     my (@dirs) = File::Spec->splitdir( $dirs );
+     foreach my $path_dir (@$path) {
+         my $abs_file = File::Spec->catfile( $path_dir, @dirs, $file );  
+         if(-f $abs_file) {
+             $path_dir =~ s|/|\\|g if $^O eq 'MSWin32'; # MicroSoft thing
+             return ($abs_file, $path_dir) if wantarray;
+             return $abs_file;
+         }
+     }
+     undef;
 }
 
 
@@ -74,10 +74,12 @@ sub find_in_include
 #
 sub pm2require
 {
-   File::Spec->catfile( split /::/, $_[-1] . '.pm');
+
+     shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+     File::Spec->catfile( split /::/, $_[0] . '.pm');
 
 }
-
+ 
 1
 
 __END__
@@ -88,12 +90,23 @@ File::PM2File - find the absolute file for a program module, loaded or unloaded
 
 =head1 SYNOPSIS
 
+  #######
+  # Direct class interface
+  #
+  ($abs_file, $inc_path, $require) = File::PM2File->pm2file($pm);
+  $abs_file                        = File::PM2File->pm2file($pm);
+
+  ($abs_file, $inc_path)           = File::PM2File->find_in_include($file_relative, [\@path]);
+  $abs_file                        = File::PM2File->find_in_include($file_relative, [\@path]);
+
+  $file                            = File::PM2File->pm2require($pm);
+
   #########
-  # class interface 
+  # class interface where the PM2FILE methods are inherited by another class
   #
   use vars (@ISA);    
   use File::PM2File;   
-  @ISA = qw(File::PM2File); 
+  @ISA = qw(File::PM2File);
  
   ($abs_file, $inc_path, $require) = __PACKAGE__->pm2file($pm);
   $abs_file                        = __PACKAGE__->pm2file($pm);
