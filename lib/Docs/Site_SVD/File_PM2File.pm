@@ -10,24 +10,23 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.06';
-$DATE = '2003/09/20';
+$VERSION = '0.07';
+$DATE = '2004/04/08';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/File_PM2File.pm' => [qw(0.06 2003/09/20), 'revised 0.05'],
-    'MANIFEST' => [qw(0.06 2003/09/20), 'generated, replaces 0.05'],
-    'Makefile.PL' => [qw(0.06 2003/09/20), 'generated, replaces 0.05'],
-    'README' => [qw(0.06 2003/09/20), 'generated, replaces 0.05'],
-    'lib/File/PM2File.pm' => [qw(1.12 2003/09/20), 'revised 1.11'],
-    't/File/PM2File.d' => [qw(0.03 2003/07/26), 'unchanged'],
-    't/File/PM2File.pm' => [qw(0.01 2003/07/11), 'unchanged'],
-    't/File/PM2File.t' => [qw(0.1 2003/09/13), 'unchanged'],
-    'tlib/File/SubPM.pm' => [qw(1.11 2003/09/20), 'unchanged'],
-    'tlib/File/Package.pm' => [qw(1.13 2003/09/20), 'revised 1.1'],
-    'tlib/Test/Tech.pm' => [qw(1.15 2003/09/20), 'revised 1.13'],
-    'tlib/Data/Secs2.pm' => [qw(1.15 2003/09/20), 'new'],
+    'lib/Docs/Site_SVD/File_PM2File.pm' => [qw(0.07 2004/04/08), 'revised 0.06'],
+    'MANIFEST' => [qw(0.07 2004/04/08), 'generated, replaces 0.06'],
+    'Makefile.PL' => [qw(0.07 2004/04/08), 'generated, replaces 0.06'],
+    'README' => [qw(0.07 2004/04/08), 'generated, replaces 0.06'],
+    'lib/File/PM2File.pm' => [qw(1.13 2004/04/08), 'revised 1.12'],
+    't/File/PM2File.d' => [qw(0.04 2004/04/08), 'revised 0.03'],
+    't/File/PM2File.pm' => [qw(0.03 2004/04/08), 'revised 0.02'],
+    't/File/PM2File.t' => [qw(0.11 2004/04/08), 'revised 0.1'],
+    't/File/File/Package.pm' => [qw(1.13 2004/04/08), 'new'],
+    't/File/Test/Tech.pm' => [qw(1.17 2004/04/08), 'new'],
+    't/File/Data/Secs2.pm' => [qw(1.15 2004/04/08), 'new'],
 
 );
 
@@ -54,11 +53,11 @@ use vars qw(%INVENTORY);
 
   File::PM2File - Convert PM specifications to file specifications
 
- Revision: E
+ Revision: F
 
- Version: 0.06
+ Version: 0.07
 
- Date: 2003/09/20
+ Date: 2004/04/08
 
  Prepared for: General Public 
 
@@ -84,7 +83,7 @@ extend the capabilities of the Perl language.
 
 The system is the Perl programming language software.
 As established by the Perl referenced documents,
-program modules, such the 
+program modules, such as the 
 "L<File::PM2File|File::PM2File>" module, extend the Perl language.
 
 The routines in this distribution convert a Program Module specification
@@ -92,7 +91,7 @@ to the file specification for the current site operating system.
 
 =head2 1.3 Document overview.
 
-This document releases File::PM2File version 0.06
+This document releases File::PM2File version 0.07
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -105,12 +104,14 @@ system file specification.
 
 =head2 3.1 Inventory of materials released.
 
-This document releases the file found
-at the following repository(s):
+This document releases the file 
 
-   http://www.softwarediamonds/packages/File-PM2File-0.06
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.06
+ File-PM2File-0.07.tar.gz
 
+found at the following repository(s):
+
+  http://www.softwarediamonds/packages/
+  http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
 
 Restrictions regarding duplication and license provisions
 are as follows:
@@ -177,18 +178,17 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/File_PM2File.pm                            0.06    2003/09/20 revised 0.05
- MANIFEST                                                     0.06    2003/09/20 generated, replaces 0.05
- Makefile.PL                                                  0.06    2003/09/20 generated, replaces 0.05
- README                                                       0.06    2003/09/20 generated, replaces 0.05
- lib/File/PM2File.pm                                          1.12    2003/09/20 revised 1.11
- t/File/PM2File.d                                             0.03    2003/07/26 unchanged
- t/File/PM2File.pm                                            0.01    2003/07/11 unchanged
- t/File/PM2File.t                                             0.1     2003/09/13 unchanged
- tlib/File/SubPM.pm                                           1.11    2003/09/20 unchanged
- tlib/File/Package.pm                                         1.13    2003/09/20 revised 1.1
- tlib/Test/Tech.pm                                            1.15    2003/09/20 revised 1.13
- tlib/Data/Secs2.pm                                           1.15    2003/09/20 new
+ lib/Docs/Site_SVD/File_PM2File.pm                            0.07    2004/04/08 revised 0.06
+ MANIFEST                                                     0.07    2004/04/08 generated, replaces 0.06
+ Makefile.PL                                                  0.07    2004/04/08 generated, replaces 0.06
+ README                                                       0.07    2004/04/08 generated, replaces 0.06
+ lib/File/PM2File.pm                                          1.13    2004/04/08 revised 1.12
+ t/File/PM2File.d                                             0.04    2004/04/08 revised 0.03
+ t/File/PM2File.pm                                            0.03    2004/04/08 revised 0.02
+ t/File/PM2File.t                                             0.11    2004/04/08 revised 0.1
+ t/File/File/Package.pm                                       1.13    2004/04/08 new
+ t/File/Test/Tech.pm                                          1.17    2004/04/08 new
+ t/File/Data/Secs2.pm                                         1.15    2004/04/08 new
 
 
 =head2 3.3 Changes
@@ -286,7 +286,7 @@ t/Test/TestUtil/TestUtil....NOK 18# Test 18 got: '$VAR1 = '\\=head1 Title Page
   File::PM2File - Convert PM specifications to file specifications
 
 
- Revision: E
+ Revision: F
 
 [snip]
 
@@ -441,6 +441,10 @@ a directory with mod of 666.
 Added the 'Data-Secs2' to the 'tlib' test library.
 Upgraded to the 'Test-Tech' module that uses the 'Data-Secs2' module.
 
+=item File-PM2File-0.07
+
+Obsoleted and superceded by the File::Where program module
+
 =back
 
 =head2 3.4 Adaptation data.
@@ -474,13 +478,12 @@ Follow the instructions for the the chosen installation software.
 
 The distribution file is at the following respositories:
 
-   http://www.softwarediamonds/packages/File-PM2File-0.06
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.06
-
+  http://www.softwarediamonds/packages/
+  http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
 
 =item Prerequistes.
 
- None.
+  'File::Where' => '0.02'
 
 
 =item Security, privacy, or safety precautions.
@@ -595,11 +598,11 @@ __DATA__
 DISTNAME: File-PM2File^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.06^
+VERSION : 0.07^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.05^
-REVISION: E^
+PREVIOUS_RELEASE: 0.06^
+REVISION: F^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 
@@ -629,13 +632,13 @@ CHANGE2CURRENT:  ^
 AUTO_REVISE: 
 lib/File/PM2File.pm
 t/File/PM2File.*
-lib/File/SubPM.pm => tlib/File/SubPM.pm
-lib/File/Package.pm => tlib/File/Package.pm
-lib/Test/Tech.pm => tlib/Test/Tech.pm
-lib/Data/Secs2.pm => tlib/Data/Secs2.pm
+lib/File/Package.pm => t/File/File/Package.pm
+lib/Test/Tech.pm => t/File/Test/Tech.pm
+lib/Data/Secs2.pm => t/File/Data/Secs2.pm
 ^
 
-PREREQ_PM:  ^
+PREREQ_PM:  'File::Where' => '0.02'^
+README_PODS: lib/File/PM2File.pm^
 
 TESTS: t/File/PM2File.t^
 
@@ -889,6 +892,10 @@ a directory with mod of 666.
 Added the 'Data-Secs2' to the 'tlib' test library.
 Upgraded to the 'Test-Tech' module that uses the 'Data-Secs2' module.
 
+\=item File-PM2File-0.07
+
+Obsoleted and superceded by the File::Where program module
+
 \=back
 
 ^
@@ -903,7 +910,7 @@ utilize and track this release.
 CAPABILITIES:
 The system is the Perl programming language software.
 As established by the Perl referenced documents,
-program modules, such the 
+program modules, such as the 
 "L<File::PM2File|File::PM2File>" module, extend the Perl language.
 
 The routines in this distribution convert a Program Module specification

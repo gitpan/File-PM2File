@@ -7,8 +7,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE);
-$VERSION = '0.03';   # automatically generated file
-$DATE = '2003/07/26';
+$VERSION = '0.04';   # automatically generated file
+$DATE = '2004/04/08';
 
 
 ##### Demonstration Script ####
@@ -89,36 +89,13 @@ follow on the next lines. For example,
 MSG
 
 demo( "\ \ \ \ use\ File\:\:Spec\;\
-\
 \ \ \ \ use\ File\:\:Package\;\
 \ \ \ \ my\ \$fp\ \=\ \'File\:\:Package\'\;\
+\ \ \ \ my\ \$uut\ \=\ \'File\:\:PM2File\'\;\
+\ \ \ \ my\ \$loaded\ \=\ \'\'\;\
 \
-\ \ \ \ my\ \$pm\ \=\ \'File\:\:PM2File\'\;\
-\ \ \ \ my\ \$loaded\ \=\ \'\'\;"); # typed in command           
-          use File::Spec;
-
-    use File::Package;
-    my $fp = 'File::Package';
-
-    my $pm = 'File::PM2File';
-    my $loaded = '';; # execution
-
-demo( "my\ \$errors\ \=\ \$fp\-\>load_package\(\ \'File\:\:PM2File\'\ \)"); # typed in command           
-      my $errors = $fp->load_package( 'File::PM2File' ); # execution
-
-demo( "\$errors", # typed in command           
-      $errors # execution
-) unless     $loaded; # condition for execution                            
-
-demo( "\$pm\-\>pm2require\(\ \"\$pm\"\)", # typed in command           
-      $pm->pm2require( "$pm")); # execution
-
-
-demo( "\ \ \ \ \#\#\#\#\#\#\#\
 \ \ \ \ \#\ Use\ the\ test\ file\ as\ an\ example\ since\ no\ its\ absolue\ path\
-\ \ \ \ \#\
 \ \ \ \ \#\ Calculate\ the\ absolute\ file\,\ relative\ file\,\ and\ include\ directory\
-\ \ \ \ \#\ \ \ \ \
 \ \ \ \ my\ \$relative_file\ \=\ File\:\:Spec\-\>catfile\(\'t\'\,\ \'File\'\,\ \'PM2File\.pm\'\)\;\ \
 \
 \ \ \ \ my\ \$restore_dir\ \=\ cwd\(\)\;\
@@ -126,31 +103,26 @@ demo( "\ \ \ \ \#\#\#\#\#\#\#\
 \ \ \ \ chdir\ File\:\:Spec\-\>updir\(\)\;\
 \ \ \ \ my\ \$include_dir\ \=\ cwd\(\)\;\
 \ \ \ \ chdir\ \$restore_dir\;\
-\ \ \ \ if\(\ \$\^O\ eq\ \'MSWin32\'\)\ \{\
-\ \ \ \ \ \ \ \ \$include_dir\ \=\~\ s\=\/\=\\\\\=g\;\
-\ \ \ \ \}\
-\
+\ \ \ \ my\ \$OS\ \=\ \$\^O\;\ \ \#\ need\ to\ escape\ \^\
+\ \ \ \ unless\ \(\$OS\)\ \{\ \ \ \#\ on\ some\ perls\ \$\^O\ is\ not\ defined\
+\ \ \ \ \ \ \ \ require\ Config\;\
+\ \ \ \ \ \ \ \ \$OS\ \=\ \$Config\:\:Config\{\'osname\'\}\;\
+\ \ \ \ \}\ \
+\ \ \ \ \$include_dir\ \=\~\ s\=\/\=\\\\\=g\ if\(\ \$\^O\ eq\ \'MSWin32\'\)\;\
 \ \ \ \ my\ \$absolute_file\ \=\ File\:\:Spec\-\>catfile\(\$include_dir\,\ \'t\'\,\ \'File\'\,\ \'PM2File\.pm\'\)\;\
 \ \ \ \ \$absolute_file\ \=\~\ s\=\.t\$\=\.pm\=\;\
 \
-\
-\ \ \ \ \#\#\#\#\#\#\
 \ \ \ \ \#\ Put\ base\ directory\ as\ the\ first\ in\ the\ \@INC\ path\
-\ \ \ \ \#\
 \ \ \ \ my\ \@restore_inc\ \=\ \@INC\;\
-\ \ \ \ unshift\ \@INC\,\ \$include_dir\;\ \ \ \ \
-\
-\ \ \ \ \#\#\#\#\#\#\
-\ \ \ \ \#\ Use\ the\ method\ under\ Test\ to\ find\ the\ absolute\ file\ and\ include\ directory\
-\ \ \ \ \#\
-\ \ \ \ my\ \@actual\ \=\ \ \$pm\-\>find_in_include\(\ \$relative_file\ \)\;\
-\
-\ \ \ \ \@INC\ \=\ \@restore_inc\;"); # typed in command           
-          #######
+\ \ \ \ unshift\ \@INC\,\ \$include_dir\;"); # typed in command           
+          use File::Spec;
+    use File::Package;
+    my $fp = 'File::Package';
+    my $uut = 'File::PM2File';
+    my $loaded = '';
+
     # Use the test file as an example since no its absolue path
-    #
     # Calculate the absolute file, relative file, and include directory
-    #    
     my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
 
     my $restore_dir = cwd();
@@ -158,37 +130,37 @@ demo( "\ \ \ \ \#\#\#\#\#\#\#\
     chdir File::Spec->updir();
     my $include_dir = cwd();
     chdir $restore_dir;
-    if( $^O eq 'MSWin32') {
-        $include_dir =~ s=/=\\=g;
-    }
-
+    my $OS = $^O;  # need to escape ^
+    unless ($OS) {   # on some perls $^O is not defined
+        require Config;
+        $OS = $Config::Config{'osname'};
+    } 
+    $include_dir =~ s=/=\\=g if( $^O eq 'MSWin32');
     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
     $absolute_file =~ s=.t$=.pm=;
 
-
-    ######
     # Put base directory as the first in the @INC path
-    #
     my @restore_inc = @INC;
-    unshift @INC, $include_dir;    
+    unshift @INC, $include_dir;; # execution
 
-    ######
-    # Use the method under Test to find the absolute file and include directory
-    #
-    my @actual =  $pm->find_in_include( $relative_file );
+demo( "my\ \$errors\ \=\ \$fp\-\>load_package\(\ \'File\:\:PM2File\'\ \)", # typed in command           
+      my $errors = $fp->load_package( 'File::PM2File' ) # execution
+) unless     $loaded; # condition for execution                            
 
-    @INC = @restore_inc;; # execution
-
-demo( "\[\@actual\]", # typed in command           
-      [@actual]); # execution
+demo( "\$uut\-\>pm2require\(\ \"\$uut\"\)", # typed in command           
+      $uut->pm2require( "$uut")); # execution
 
 
-demo( "\@actual\ \=\ \$pm\-\>pm2file\(\ \'t\:\:File\:\:PM2File\'\ \)"); # typed in command           
-      @actual = $pm->pm2file( 't::File::PM2File' ); # execution
+demo( "\[my\ \@actual\ \=\ \ \$uut\-\>find_in_include\(\ \$relative_file\ \)\]", # typed in command           
+      [my @actual =  $uut->find_in_include( $relative_file )]); # execution
 
-demo( "\[\@actual\]", # typed in command           
-      [@actual]); # execution
 
+demo( "\[\@actual\ \=\ \$uut\-\>pm2file\(\ \'t\:\:File\:\:PM2File\'\ \)\]", # typed in command           
+      [@actual = $uut->pm2file( 't::File::PM2File' )]); # execution
+
+
+demo( "\@INC\ \=\ \@restore_inc"); # typed in command           
+      @INC = @restore_inc; # execution
 
 
 =head1 NAME
@@ -212,15 +184,15 @@ and use in source and binary forms, with or
 without modification, provided that the 
 following conditions are met: 
 
-=over 4
+/=over 4
 
-=item 1
+/=item 1
 
 Redistributions of source code, modified or unmodified
 must retain the above copyright notice, this list of
 conditions and the following disclaimer. 
 
-=item 2
+/=item 2
 
 Redistributions in binary form must 
 reproduce the above copyright notice,
@@ -229,7 +201,7 @@ disclaimer in the documentation and/or
 other materials provided with the
 distribution.
 
-=back
+/=back
 
 SOFTWARE DIAMONDS, http://www.SoftwareDiamonds.com,
 PROVIDES THIS SOFTWARE 

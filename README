@@ -1,3 +1,135 @@
+NAME
+    File::PM2File - obsolete. User File::Where
+
+SYNOPSIS
+     file_in_include()  # obsolete. Replace with File::Where::where()
+     pm2file()          # obsolete. Replace with  File::Where::where_pm()
+     pm2require()       # obsolete. Replace with  File::Where::pm2require()
+
+     $File::PM2File::warn_obsolete = 1;  # turns on obsolete warning
+
+REQUIREMENTS
+    The File::PM2File subrouitnes shall not used.
+
+    The File::PM2File subroutines shall be replaced by the appropriate
+    File::Where subroutine whenever a File::PM2File subroutine needs
+    revision as follows:
+
+     File::PM2File::find_in_include()   File::Where::where()
+     File::PM2File::pm2file             File::Where::where_pm()
+     File::PM2File::pm2require          File::Where::pm2require
+
+    NOTE: The subroutine File::Where::where is almost a direct drop in for
+    File::PM2File::find_in_include(). The difference is in an array context
+    File::Where::where() returns a third item where
+    File::PM2File::find_in_include() only returns two. The first two items,
+    though, are the same.
+
+DEMONSTRATION
+     ~~~~~~ Demonstration overview ~~~~~
+
+    Perl code begins with the prompt
+
+     =>
+
+    The selected results from executing the Perl Code follow on the next
+    lines. For example,
+
+     => 2 + 2
+     4
+
+     ~~~~~~ The demonstration follows ~~~~~
+
+     =>     use File::Spec;
+     =>     use File::Package;
+     =>     my $fp = 'File::Package';
+     =>     my $uut = 'File::PM2File';
+     =>     my $loaded = '';
+
+     =>     # Use the test file as an example since no its absolue path
+     =>     # Calculate the absolute file, relative file, and include directory
+     =>     my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
+
+     =>     my $restore_dir = cwd();
+     =>     chdir File::Spec->updir();
+     =>     chdir File::Spec->updir();
+     =>     my $include_dir = cwd();
+     =>     chdir $restore_dir;
+     =>     my $OS = $^O;  # need to escape ^
+     =>     unless ($OS) {   # on some perls $^O is not defined
+     =>         require Config;
+     =>         $OS = $Config::Config{'osname'};
+     =>     } 
+     =>     $include_dir =~ s=/=\\=g if( $^O eq 'MSWin32');
+     =>     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
+     =>     $absolute_file =~ s=.t$=.pm=;
+
+     =>     # Put base directory as the first in the @INC path
+     =>     my @restore_inc = @INC;
+     =>     unshift @INC, $include_dir;
+     => my $errors = $fp->load_package( 'File::PM2File' )
+     ''
+
+     => $uut->pm2require( "$uut")
+     'File\PM2File.pm'
+
+     => [my @actual =  $uut->find_in_include( $relative_file )]
+     [
+               'E:\User\SoftwareDiamonds\installation\t\File\PM2File.pm',
+               'E:\User\SoftwareDiamonds\installation'
+             ]
+
+     => [@actual = $uut->pm2file( 't::File::PM2File' )]
+     [
+               'E:\User\SoftwareDiamonds\installation\t\File\PM2File.pm',
+               'E:\User\SoftwareDiamonds\installation',
+               't\File\PM2File.pm'
+             ]
+
+     => @INC = @restore_inc
+
+NOTES
+  AUTHOR
+    The holder of the copyright and maintainer is
+
+    <support@SoftwareDiamonds.com>
+
+  COPYRIGHT NOTICE
+    Copyrighted (c) 2002 Software Diamonds
+
+    All Rights Reserved
+
+  BINDING REQUIREMENTS NOTICE
+    Binding requirements are indexed with the pharse 'shall[dd]' where dd is
+    an unique number for each header section. This conforms to standard
+    federal government practices, 490A ("3.2.3.6" in STD490A). In accordance
+    with the License, Software Diamonds is not liable for any requirement,
+    binding or otherwise.
+
+  LICENSE
+    Software Diamonds permits the redistribution and use in source and
+    binary forms, with or without modification, provided that the following
+    conditions are met:
+
+    1   Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+
+    2   Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+
+    SOFTWARE DIAMONDS, http::www.softwarediamonds.com, PROVIDES THIS
+    SOFTWARE 'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
+    NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL SOFTWARE
+    DIAMONDS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    SPECIAL,EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,DATA, OR
+    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF NEGLIGENCE OR OTHERWISE) ARISING IN
+    ANY WAY OUT OF THE POSSIBILITY OF SUCH DAMAGE.
+
 Title Page
      Software Version Description
 
@@ -5,11 +137,11 @@ Title Page
 
       File::PM2File - Convert PM specifications to file specifications
 
-     Revision: E
+     Revision: F
 
-     Version: 0.06
+     Version: 0.07
 
-     Date: 2003/09/20
+     Date: 2004/04/08
 
      Prepared for: General Public 
 
@@ -29,14 +161,14 @@ Title Page
 
   1.2 System overview
     The system is the Perl programming language software. As established by
-    the Perl referenced documents, program modules, such the "File::PM2File"
-    module, extend the Perl language.
+    the Perl referenced documents, program modules, such as the
+    "File::PM2File" module, extend the Perl language.
 
     The routines in this distribution convert a Program Module specification
     to the file specification for the current site operating system.
 
   1.3 Document overview.
-    This document releases File::PM2File version 0.06 providing a
+    This document releases File::PM2File version 0.07 providing a
     description of the inventory, installation instructions and other
     information necessary to utilize and track this release.
 
@@ -45,10 +177,14 @@ Title Page
     specification.
 
   3.1 Inventory of materials released.
-    This document releases the file found at the following repository(s):
+    This document releases the file
 
-       http://www.softwarediamonds/packages/File-PM2File-0.06
-       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.06
+     File-PM2File-0.07.tar.gz
+
+    found at the following repository(s):
+
+      http://www.softwarediamonds/packages/
+      http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
 
     Restrictions regarding duplication and license provisions are as
     follows:
@@ -92,18 +228,17 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/File_PM2File.pm                            0.06    2003/09/20 revised 0.05
-     MANIFEST                                                     0.06    2003/09/20 generated, replaces 0.05
-     Makefile.PL                                                  0.06    2003/09/20 generated, replaces 0.05
-     README                                                       0.06    2003/09/20 generated, replaces 0.05
-     lib/File/PM2File.pm                                          1.12    2003/09/20 revised 1.11
-     t/File/PM2File.d                                             0.03    2003/07/26 unchanged
-     t/File/PM2File.pm                                            0.01    2003/07/11 unchanged
-     t/File/PM2File.t                                             0.1     2003/09/13 unchanged
-     tlib/File/SubPM.pm                                           1.11    2003/09/20 unchanged
-     tlib/File/Package.pm                                         1.13    2003/09/20 revised 1.1
-     tlib/Test/Tech.pm                                            1.15    2003/09/20 revised 1.13
-     tlib/Data/Secs2.pm                                           1.15    2003/09/20 new
+     lib/Docs/Site_SVD/File_PM2File.pm                            0.07    2004/04/08 revised 0.06
+     MANIFEST                                                     0.07    2004/04/08 generated, replaces 0.06
+     Makefile.PL                                                  0.07    2004/04/08 generated, replaces 0.06
+     README                                                       0.07    2004/04/08 generated, replaces 0.06
+     lib/File/PM2File.pm                                          1.13    2004/04/08 revised 1.12
+     t/File/PM2File.d                                             0.04    2004/04/08 revised 0.03
+     t/File/PM2File.pm                                            0.03    2004/04/08 revised 0.02
+     t/File/PM2File.t                                             0.11    2004/04/08 revised 0.1
+     t/File/File/Package.pm                                       1.13    2004/04/08 new
+     t/File/Test/Tech.pm                                          1.17    2004/04/08 new
+     t/File/Data/Secs2.pm                                         1.15    2004/04/08 new
 
   3.3 Changes
     Changes are as follows:
@@ -192,7 +327,7 @@ Title Page
 
           File::PM2File - Convert PM specifications to file specifications
 
-         Revision: E
+         Revision: F
 
         [snip]
 
@@ -316,6 +451,9 @@ Title Page
         Added the 'Data-Secs2' to the 'tlib' test library. Upgraded to the
         'Test-Tech' module that uses the 'Data-Secs2' module.
 
+    File-PM2File-0.07
+        Obsoleted and superceded by the File::Where program module
+
   3.4 Adaptation data.
     This installation requires that the installation site has the Perl
     programming language installed. There are no other additional
@@ -341,11 +479,11 @@ Title Page
 
         The distribution file is at the following respositories:
 
-           http://www.softwarediamonds/packages/File-PM2File-0.06
-           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.06
+          http://www.softwarediamonds/packages/
+          http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
 
     Prerequistes.
-         None.
+          'File::Where' => '0.02'
 
     Security, privacy, or safety precautions.
         None.

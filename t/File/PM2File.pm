@@ -10,8 +10,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.02';
-$DATE = '2003/07/11';
+$VERSION = '0.03';
+$DATE = '2004/04/08';
 $FILE = __FILE__;
 
 ########
@@ -40,7 +40,7 @@ $FILE = __FILE__;
 
  Version: 
 
- Date: 2003/07/11
+ Date: 2004/04/08
 
  Prepared for: General Public 
 
@@ -89,8 +89,27 @@ L<STD FormDB Test Description Fields|Test::STDmaker/STD FormDB Test Description 
      use File::Spec;
      use File::Package;
      my $fp = 'File::Package';
-     my $pm = 'File::PM2File';
+     my $uut = 'File::PM2File';
      my $loaded = '';
+     # Use the test file as an example since no its absolue path
+     # Calculate the absolute file, relative file, and include directory
+     my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
+     my $restore_dir = cwd();
+     chdir File::Spec->updir();
+     chdir File::Spec->updir();
+     my $include_dir = cwd();
+     chdir $restore_dir;
+     my $OS = $^^O;  # need to escape ^^
+     unless ($OS) {   # on some perls $^^O is not defined
+         require Config;
+         $OS = $Config::Config{'osname'};
+     } 
+     $include_dir =~ s=/=\\=g if( $^^O eq 'MSWin32');
+     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
+     $absolute_file =~ s=.t$=.pm=;
+     # Put base directory as the first in the @INC path
+     my @restore_inc = @INC;
+     unshift @INC, $include_dir;
  ^
  VO: ^
   N: UUT not loaded^
@@ -102,60 +121,28 @@ L<STD FormDB Test Description Fields|Test::STDmaker/STD FormDB Test Description 
 
   N: Load UUT^
   S: $loaded^
-  C: my $errors = $fp->load_package( 'File::PM2File' )^
-  A: $errors^
+  A: my $errors = $fp->load_package( 'File::PM2File' )^
  SE: ''^
  ok: 2^
 
 =head2 ok: 3
 
   N: pm2require^
-  A: $pm->pm2require( "$pm")^
+  A: $uut->pm2require( "$uut")^
   E: File::Spec->catfile('File', 'PM2File' . '.pm')^
  ok: 3^
 
 =head2 ok: 4
 
   N: find_in_include^
-
-  C:
-     #######
-     # Use the test file as an example since no its absolue path
-     #
-     # Calculate the absolute file, relative file, and include directory
-     #    
-     my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
-     my $restore_dir = cwd();
-     chdir File::Spec->updir();
-     chdir File::Spec->updir();
-     my $include_dir = cwd();
-     chdir $restore_dir;
-     if( $^^O eq 'MSWin32') {
-         $include_dir =~ s=/=\\=g;
-     }
-     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
-     $absolute_file =~ s=.t$=.pm=;
-
-     ######
-     # Put base directory as the first in the @INC path
-     #
-     my @restore_inc = @INC;
-     unshift @INC, $include_dir;    
-     ######
-     # Use the method under Test to find the absolute file and include directory
-     #
-     my @actual =  $pm->find_in_include( $relative_file );
-     @INC = @restore_inc;
- ^
-  A: [@actual]^
+  A: [my @actual =  $uut->find_in_include( $relative_file )]^
   E: [$absolute_file, $include_dir]^
  ok: 4^
 
 =head2 ok: 5
 
   N: pm2file^
-  C: @actual = $pm->pm2file( 't::File::PM2File' )^
-  A: [@actual]^
+  A: [@actual = $uut->pm2file( 't::File::PM2File' )]^
   E: [$absolute_file, $include_dir, $relative_file]^
  ok: 5^
 
@@ -194,15 +181,15 @@ and use in source and binary forms, with or
 without modification, provided that the 
 following conditions are met: 
 
-=over 4
+/=over 4
 
-=item 1
+/=item 1
 
 Redistributions of source code, modified or unmodified
 must retain the above copyright notice, this list of
 conditions and the following disclaimer. 
 
-=item 2
+/=item 2
 
 Redistributions in binary form must 
 reproduce the above copyright notice,
@@ -211,7 +198,7 @@ disclaimer in the documentation and/or
 other materials provided with the
 distribution.
 
-=back
+/=back
 
 SOFTWARE DIAMONDS, http://www.SoftwareDiamonds.com,
 PROVIDES THIS SOFTWARE 
@@ -282,12 +269,32 @@ Verify: PM2File.t^
 
  C:
     use File::Spec;
-
     use File::Package;
     my $fp = 'File::Package';
-
-    my $pm = 'File::PM2File';
+    my $uut = 'File::PM2File';
     my $loaded = '';
+
+    # Use the test file as an example since no its absolue path
+    # Calculate the absolute file, relative file, and include directory
+    my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
+
+    my $restore_dir = cwd();
+    chdir File::Spec->updir();
+    chdir File::Spec->updir();
+    my $include_dir = cwd();
+    chdir $restore_dir;
+    my $OS = $^^O;  # need to escape ^^
+    unless ($OS) {   # on some perls $^^O is not defined
+        require Config;
+        $OS = $Config::Config{'osname'};
+    } 
+    $include_dir =~ s=/=\\=g if( $^^O eq 'MSWin32');
+    my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
+    $absolute_file =~ s=.t$=.pm=;
+
+    # Put base directory as the first in the @INC path
+    my @restore_inc = @INC;
+    unshift @INC, $include_dir;
 ^
 
 VO: ^
@@ -298,63 +305,26 @@ ok: 1^
 
  N: Load UUT^
  S: $loaded^
- C: my $errors = $fp->load_package( 'File::PM2File' )^
- A: $errors^
+ A: my $errors = $fp->load_package( 'File::PM2File' )^
 SE: ''^
 ok: 2^
 
  N: pm2require^
- A: $pm->pm2require( "$pm")^
+ A: $uut->pm2require( "$uut")^
  E: File::Spec->catfile('File', 'PM2File' . '.pm')^
 ok: 3^
 
  N: find_in_include^
-
- C:
-    #######
-    # Use the test file as an example since no its absolue path
-    #
-    # Calculate the absolute file, relative file, and include directory
-    #    
-    my $relative_file = File::Spec->catfile('t', 'File', 'PM2File.pm'); 
-
-    my $restore_dir = cwd();
-    chdir File::Spec->updir();
-    chdir File::Spec->updir();
-    my $include_dir = cwd();
-    chdir $restore_dir;
-    if( $^^O eq 'MSWin32') {
-        $include_dir =~ s=/=\\=g;
-    }
-
-    my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
-    $absolute_file =~ s=.t$=.pm=;
-
-
-    ######
-    # Put base directory as the first in the @INC path
-    #
-    my @restore_inc = @INC;
-    unshift @INC, $include_dir;    
-
-    ######
-    # Use the method under Test to find the absolute file and include directory
-    #
-    my @actual =  $pm->find_in_include( $relative_file );
-
-    @INC = @restore_inc;
-^
-
- A: [@actual]^
+ A: [my @actual =  $uut->find_in_include( $relative_file )]^
  E: [$absolute_file, $include_dir]^
 ok: 4^
 
  N: pm2file^
- C: @actual = $pm->pm2file( 't::File::PM2File' )^
- A: [@actual]^
+ A: [@actual = $uut->pm2file( 't::File::PM2File' )]^
  E: [$absolute_file, $include_dir, $relative_file]^
 ok: 5^
 
+ C: @INC = @restore_inc^
 
 See_Also: L<File::PM2File>^
 
@@ -366,15 +336,15 @@ and use in source and binary forms, with or
 without modification, provided that the 
 following conditions are met: 
 
-=over 4
+/=over 4
 
-=item 1
+/=item 1
 
 Redistributions of source code, modified or unmodified
 must retain the above copyright notice, this list of
 conditions and the following disclaimer. 
 
-=item 2
+/=item 2
 
 Redistributions in binary form must 
 reproduce the above copyright notice,
@@ -383,7 +353,7 @@ disclaimer in the documentation and/or
 other materials provided with the
 distribution.
 
-=back
+/=back
 
 SOFTWARE DIAMONDS, http://www.SoftwareDiamonds.com,
 PROVIDES THIS SOFTWARE 
