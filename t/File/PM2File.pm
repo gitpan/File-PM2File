@@ -10,8 +10,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.01';
-$DATE = '2003/07/04';
+$VERSION = '0.02';
+$DATE = '2003/07/11';
 $FILE = __FILE__;
 
 ########
@@ -40,7 +40,7 @@ $FILE = __FILE__;
 
  Version: 
 
- Date: 2003/07/04
+ Date: 2003/07/11
 
  Prepared for: General Public 
 
@@ -130,7 +130,9 @@ L<STD FormDB Test Description Fields|Test::STDmaker/STD FormDB Test Description 
      chdir File::Spec->updir();
      my $include_dir = cwd();
      chdir $restore_dir;
-     $include_dir =~ s=/=\\=g;
+     if( $^^O eq 'MSWin32') {
+         $include_dir =~ s=/=\\=g;
+     }
      my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
      $absolute_file =~ s=.t$=.pm=;
 
@@ -321,7 +323,9 @@ ok: 3^
     chdir File::Spec->updir();
     my $include_dir = cwd();
     chdir $restore_dir;
-    $include_dir =~ s=/=\\=g;
+    if( $^^O eq 'MSWin32') {
+        $include_dir =~ s=/=\\=g;
+    }
 
     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
     $absolute_file =~ s=.t$=.pm=;

@@ -7,8 +7,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '0.07';   # automatically generated file
-$DATE = '2003/07/04';
+$VERSION = '0.08';   # automatically generated file
+$DATE = '2003/07/11';
 $FILE = __FILE__;
 
 use Test::Tech;
@@ -137,7 +137,9 @@ ok(  $pm->pm2require( "$pm"), # actual results
     chdir File::Spec->updir();
     my $include_dir = cwd();
     chdir $restore_dir;
-    $include_dir =~ s=/=\\=g;
+    if( $^O eq 'MSWin32') {
+        $include_dir =~ s=/=\\=g;
+    }
 
     my $absolute_file = File::Spec->catfile($include_dir, 't', 'File', 'PM2File.pm');
     $absolute_file =~ s=.t$=.pm=;

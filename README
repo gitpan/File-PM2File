@@ -5,9 +5,9 @@ Title Page
 
       File::PM2File - Convert PM specifications to file specifications
 
-     Revision: A
+     Revision: B
 
-     Version: 0.02
+     Version: 0.03
 
      Date: 2003/07/11
 
@@ -39,7 +39,7 @@ Title Page
 
   1.3 Document overview.
 
-    This document releases File::PM2File version 0.02 providing a
+    This document releases File::PM2File version 0.03 providing a
     description of the inventory, installation instructions and other
     information necessary to utilize and track this release.
 
@@ -51,8 +51,8 @@ Title Page
 
     This document releases the file found at the following repository(s):
 
-       http://www.softwarediamonds/packages/File-PM2File-0.02
-       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.02
+       http://www.softwarediamonds/packages/File-PM2File-0.03
+       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.03
 
     Restrictions regarding duplication and license provisions are as
     follows:
@@ -97,14 +97,14 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/File_PM2File.pm                            0.02    2003/07/11 revised 0.01
-     MANIFEST                                                     0.02    2003/07/11 generated, replaces 0.01
-     Makefile.PL                                                  0.02    2003/07/11 generated, replaces 0.01
-     README                                                       0.02    2003/07/11 generated, replaces 0.01
-     lib/File/PM2File.pm                                          1.11    2003/07/11 revised 1.1
-     t/File/PM2File.d                                             0.01    2003/07/07 unchanged
-     t/File/PM2File.pm                                            0.01    2003/06/07 unchanged
-     t/File/PM2File.t                                             0.01    2003/07/07 unchanged
+     lib/Docs/Site_SVD/File_PM2File.pm                            0.03    2003/07/11 revised 0.02
+     MANIFEST                                                     0.03    2003/07/11 generated, replaces 0.02
+     Makefile.PL                                                  0.03    2003/07/11 generated, replaces 0.02
+     README                                                       0.03    2003/07/11 generated, replaces 0.02
+     lib/File/PM2File.pm                                          1.11    2003/07/11 unchanged
+     t/File/PM2File.d                                             0.02    2003/07/11 revised 0.01
+     t/File/PM2File.pm                                            0.02    2003/07/11 revised 0.01
+     t/File/PM2File.t                                             0.08    2003/07/11 revised 0.07
 
   3.3 Changes
 
@@ -194,7 +194,7 @@ Title Page
 
           File::PM2File - Convert PM specifications to file specifications
 
-         Revision: A
+         Revision: B
 
         [snip]
 
@@ -330,8 +330,8 @@ Title Page
 
         The distribution file is at the following respositories:
 
-           http://www.softwarediamonds/packages/File-PM2File-0.02
-           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.02
+           http://www.softwarediamonds/packages/File-PM2File-0.03
+           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/File-PM2File-0.03
 
     Prerequistes.
          'File::SmartNL' => '0',
