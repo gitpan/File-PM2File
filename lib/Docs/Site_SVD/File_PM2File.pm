@@ -10,23 +10,23 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.07';
-$DATE = '2004/04/08';
+$VERSION = '0.08';
+$DATE = '2004/04/09';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/File_PM2File.pm' => [qw(0.07 2004/04/08), 'revised 0.06'],
-    'MANIFEST' => [qw(0.07 2004/04/08), 'generated, replaces 0.06'],
-    'Makefile.PL' => [qw(0.07 2004/04/08), 'generated, replaces 0.06'],
-    'README' => [qw(0.07 2004/04/08), 'generated, replaces 0.06'],
-    'lib/File/PM2File.pm' => [qw(1.13 2004/04/08), 'revised 1.12'],
-    't/File/PM2File.d' => [qw(0.04 2004/04/08), 'revised 0.03'],
-    't/File/PM2File.pm' => [qw(0.03 2004/04/08), 'revised 0.02'],
-    't/File/PM2File.t' => [qw(0.11 2004/04/08), 'revised 0.1'],
-    't/File/File/Package.pm' => [qw(1.13 2004/04/08), 'new'],
-    't/File/Test/Tech.pm' => [qw(1.17 2004/04/08), 'new'],
-    't/File/Data/Secs2.pm' => [qw(1.15 2004/04/08), 'new'],
+    'lib/Docs/Site_SVD/File_PM2File.pm' => [qw(0.08 2004/04/09), 'revised 0.07'],
+    'MANIFEST' => [qw(0.08 2004/04/09), 'generated, replaces 0.07'],
+    'Makefile.PL' => [qw(0.08 2004/04/09), 'generated, replaces 0.07'],
+    'README' => [qw(0.08 2004/04/09), 'generated, replaces 0.07'],
+    'lib/File/PM2File.pm' => [qw(1.13 2004/04/08), 'unchanged'],
+    't/File/PM2File.d' => [qw(0.05 2004/04/09), 'revised 0.04'],
+    't/File/PM2File.pm' => [qw(0.01 2004/04/08), 'unchanged'],
+    't/File/PM2File.t' => [qw(0.12 2004/04/09), 'revised 0.11'],
+    't/File/File/Package.pm' => [qw(1.14 2004/04/09), 'unchanged'],
+    't/File/Test/Tech.pm' => [qw(1.17 2004/04/09), 'unchanged'],
+    't/File/Data/Secs2.pm' => [qw(1.15 2004/04/09), 'unchanged'],
 
 );
 
@@ -53,11 +53,11 @@ use vars qw(%INVENTORY);
 
   File::PM2File - Convert PM specifications to file specifications
 
- Revision: F
+ Revision: G
 
- Version: 0.07
+ Version: 0.08
 
- Date: 2004/04/08
+ Date: 2004/04/09
 
  Prepared for: General Public 
 
@@ -91,7 +91,7 @@ to the file specification for the current site operating system.
 
 =head2 1.3 Document overview.
 
-This document releases File::PM2File version 0.07
+This document releases File::PM2File version 0.08
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -106,7 +106,7 @@ system file specification.
 
 This document releases the file 
 
- File-PM2File-0.07.tar.gz
+ File-PM2File-0.08.tar.gz
 
 found at the following repository(s):
 
@@ -178,17 +178,17 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/File_PM2File.pm                            0.07    2004/04/08 revised 0.06
- MANIFEST                                                     0.07    2004/04/08 generated, replaces 0.06
- Makefile.PL                                                  0.07    2004/04/08 generated, replaces 0.06
- README                                                       0.07    2004/04/08 generated, replaces 0.06
- lib/File/PM2File.pm                                          1.13    2004/04/08 revised 1.12
- t/File/PM2File.d                                             0.04    2004/04/08 revised 0.03
- t/File/PM2File.pm                                            0.03    2004/04/08 revised 0.02
- t/File/PM2File.t                                             0.11    2004/04/08 revised 0.1
- t/File/File/Package.pm                                       1.13    2004/04/08 new
- t/File/Test/Tech.pm                                          1.17    2004/04/08 new
- t/File/Data/Secs2.pm                                         1.15    2004/04/08 new
+ lib/Docs/Site_SVD/File_PM2File.pm                            0.08    2004/04/09 revised 0.07
+ MANIFEST                                                     0.08    2004/04/09 generated, replaces 0.07
+ Makefile.PL                                                  0.08    2004/04/09 generated, replaces 0.07
+ README                                                       0.08    2004/04/09 generated, replaces 0.07
+ lib/File/PM2File.pm                                          1.13    2004/04/08 unchanged
+ t/File/PM2File.d                                             0.05    2004/04/09 revised 0.04
+ t/File/PM2File.pm                                            0.01    2004/04/08 unchanged
+ t/File/PM2File.t                                             0.12    2004/04/09 revised 0.11
+ t/File/File/Package.pm                                       1.14    2004/04/09 unchanged
+ t/File/Test/Tech.pm                                          1.17    2004/04/09 unchanged
+ t/File/Data/Secs2.pm                                         1.15    2004/04/09 unchanged
 
 
 =head2 3.3 Changes
@@ -286,7 +286,7 @@ t/Test/TestUtil/TestUtil....NOK 18# Test 18 got: '$VAR1 = '\\=head1 Title Page
   File::PM2File - Convert PM specifications to file specifications
 
 
- Revision: F
+ Revision: G
 
 [snip]
 
@@ -443,7 +443,36 @@ Upgraded to the 'Test-Tech' module that uses the 'Data-Secs2' module.
 
 =item File-PM2File-0.07
 
-Obsoleted and superceded by the File::Where program module
+Obsoleted and superceded by the File::Where program module. All the subroutines
+now use functions from the File::Where program module. Changing over to File::Where
+subroutines will provide a micro increase in performance by eliminating a layer
+of subroutine calls.
+
+The lastest build of Test::STDmaker expects the test library in the same
+directory as the test script.
+Coordiated with the lastest Test::STDmaker by moving the
+test library from tlib to t/File, the same directory as the test script
+and deleting the test library File::TestPath program module.
+
+=item File-PM2File-0.08
+
+ Subject: FAIL Test-Tech-0.18 i586-linux 2.4.22-4tr 
+ From: cpansmoke@alternation.net 
+ Date: Thu,  8 Apr 2004 15:09:35 -0300 (ADT) 
+
+ PERL_DL_NONLAZY=1 /usr/bin/perl5.8.0 "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/Test/Tech/Tech.t
+ t/Test/Tech/Tech....Can't locate FindBIN.pm
+
+ Summary of my perl5 (revision 5.0 version 8 subversion 0) configuration:
+   Platform:
+     osname=linux, osvers=2.4.22-4tr, archname=i586-linux
+
+This is capitalization problem. The program module name is 'FindBin' not 'FindBIN' which
+is part of Perl. Microsoft does not care about capitalization differences while linux
+does. This error is in the test script automatically generated by C<Test::STDmaker>
+and was just introduced when moved test script libraries from C<tlib> to the directory
+of the test script. Repaired C<Test::STDmaker> and regenerated the distribution.
+
 
 =back
 
@@ -598,11 +627,11 @@ __DATA__
 DISTNAME: File-PM2File^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.07^
+VERSION : 0.08^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.06^
-REVISION: F^
+PREVIOUS_RELEASE: 0.07^
+REVISION: G^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 
@@ -894,7 +923,36 @@ Upgraded to the 'Test-Tech' module that uses the 'Data-Secs2' module.
 
 \=item File-PM2File-0.07
 
-Obsoleted and superceded by the File::Where program module
+Obsoleted and superceded by the File::Where program module. All the subroutines
+now use functions from the File::Where program module. Changing over to File::Where
+subroutines will provide a micro increase in performance by eliminating a layer
+of subroutine calls.
+
+The lastest build of Test::STDmaker expects the test library in the same
+directory as the test script.
+Coordiated with the lastest Test::STDmaker by moving the
+test library from tlib to t/File, the same directory as the test script
+and deleting the test library File::TestPath program module.
+
+\=item File-PM2File-0.08
+
+ Subject: FAIL Test-Tech-0.18 i586-linux 2.4.22-4tr 
+ From: cpansmoke@alternation.net 
+ Date: Thu,  8 Apr 2004 15:09:35 -0300 (ADT) 
+
+ PERL_DL_NONLAZY=1 /usr/bin/perl5.8.0 "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/Test/Tech/Tech.t
+ t/Test/Tech/Tech....Can't locate FindBIN.pm
+
+ Summary of my perl5 (revision 5.0 version 8 subversion 0) configuration:
+   Platform:
+     osname=linux, osvers=2.4.22-4tr, archname=i586-linux
+
+This is capitalization problem. The program module name is 'FindBin' not 'FindBIN' which
+is part of Perl. Microsoft does not care about capitalization differences while linux
+does. This error is in the test script automatically generated by C<Test::STDmaker>
+and was just introduced when moved test script libraries from C<tlib> to the directory
+of the test script. Repaired C<Test::STDmaker> and regenerated the distribution.
+
 
 \=back
 
